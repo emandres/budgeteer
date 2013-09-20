@@ -1,0 +1,36 @@
+<div class="row">
+  <p id="notice"><%= notice %></p>
+
+  <h1><%= @budget.name %></h1>
+  <div class="row">
+    <% [:revenues, :expenses].each do |sym| %>
+      <% budget_items = @budget.send(sym) %>
+      <div class="large-6 columns">
+        <h4><%=t sym %></h4>
+        <table>
+          <thead>
+            <tr>
+              <th><%=t :name %></th>
+              <th><%=t :amount %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% budget_items.each do |r| %>
+              <tr>
+                <td><%= r.name %></td>
+                <td><%= number_to_currency r.amount %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <% singular = sym.to_s.singularize %>
+        <%= link_to "New #{singular.titleize}", send("new_budget_#{singular}_path", @budget), class: 'button' %>
+      </div>
+
+    <% end %>
+  </div>
+
+  <%= link_to 'Edit', edit_budget_path(@budget) %> |
+  <%= link_to 'Back', budgets_path %>
+</div>

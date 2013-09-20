@@ -1,0 +1,30 @@
+<h1>New <%= @type %></h1>
+<%= form_for([@budget, @budget_item]) do |f| %>
+  <% if @budget_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@budget_item.errors.count, "error") %> prohibited this <%= @type %> from being saved:</h2>
+
+      <ul>
+        <% @budget_item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <%= f.text_field :name, placeholder: t(:name) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-2 columns">
+      <%= f.text_field :amount, placeholder: "$123.45" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-4 columns">
+      <%= f.submit nil, class: "button" %>
+    </div>
+  </div>
+<% end %>
