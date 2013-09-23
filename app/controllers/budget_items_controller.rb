@@ -10,10 +10,14 @@ class BudgetItemsController < ApplicationController
 
   def create
     @budget = Budget.find(params[:budget_id])
-    @budget_item = new_budget_item(params[:budget_item])
+    @budget_item = new_budget_item(budget_item_params)
     @budget.budget_items << @budget_item
     
-    redirect_to @budget
+    if @budget_item.save
+      redirect_to @budget
+    else
+      render 'new'
+    end
   end
 
   def destroy
@@ -23,15 +27,23 @@ class BudgetItemsController < ApplicationController
   end
 
   private
-  def new_budget_item(*args)
-    Object.const_get(@type.titleize).new(*args)
+  def new_budget_item(args = {})
+    type_class.new(args)
   end
 
   def budget_item_params
-    params.require(:budget_item).permit(:name, :amount)
+    params.require(type_sym).permit(:name, :amount)
   end
 
   def set_type
     @type = request.original_url.match(/(expense|revenue)/)[1]
+  end
+
+  def type_class
+    Object.const_get(@type.camelize)
+  end
+
+  def type_sym
+    @type.to_sym
   end
 end

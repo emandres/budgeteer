@@ -30,6 +30,7 @@ group :doc do
 end
 
 gem 'zurb-foundation'
+gem 'debugger'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

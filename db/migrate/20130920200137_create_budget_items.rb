@@ -4,6 +4,7 @@ class CreateBudgetItems < ActiveRecord::Migration
       t.string :name
       t.decimal :amount, precision: 10, scale: 2
       t.references :budget, index: true
+      t.references :account, index: true
       t.string :type
 
       t.timestamps

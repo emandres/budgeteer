@@ -3,4 +3,8 @@ Budgeteer::Application.routes.draw do
     resources :revenues, controller: 'budget_items', only: [:new, :create, :destroy]
     resources :expenses, controller: 'budget_items', only: [:new, :create, :destroy]
   end
+
+  resources :accounts
+  resources :expense_accounts, controller: 'accounts'
+  resources :revenue_accounts, controller: 'accounts'
 end
