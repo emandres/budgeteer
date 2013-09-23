@@ -1,0 +1,30 @@
+<div class="row">
+  <p id="notice"><%= notice %></p>
+
+  <h1><%= @budget_template.name %></h1>
+  <div class="row">
+    <% [:revenue_accounts, :expense_accounts].each do |sym| %>
+      <% accounts = @budget_template.send(sym) %>
+      <div class="large-6 columns">
+        <h4><%=t sym %></h4>
+        <table cellspacing="0">
+          <thead>
+            <tr>
+              <th><%=t :name %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% accounts.each do |account| %>
+              <tr>
+                <td><%= account.name %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to 'Edit', edit_budget_template_path(@budget_template) %> |
+  <%= link_to 'Back', budget_templates_path %>
+</div>

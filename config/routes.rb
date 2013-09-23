@@ -7,4 +7,6 @@ Budgeteer::Application.routes.draw do
   resources :accounts
   resources :expense_accounts, controller: 'accounts'
   resources :revenue_accounts, controller: 'accounts'
+
+  resources :budget_templates
 end

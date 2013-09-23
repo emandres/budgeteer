@@ -1,0 +1,25 @@
+<h1>Budget templates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @budget_templates.each do |budget_template| %>
+      <tr>
+        <td><%= link_to budget_template.name, budget_template %></td>
+        <td><%= link_to 'Edit', edit_budget_template_path(budget_template) %></td>
+        <td><%= link_to 'Destroy', budget_template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Budget Template', new_budget_template_path, class: 'button' %>

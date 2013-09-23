@@ -38,7 +38,8 @@ class BudgetTemplatesController < ApplicationController
   end
 
   def destroy
-
+    @budget_template.destroy
+    redirect_to budget_templates_path
   end
 
 

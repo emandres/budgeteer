@@ -1,0 +1,25 @@
+<%= form_for(@budget_template) do |f| %>
+  <% if @budget_template.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@budget_template.errors.count, "error") %> prohibited this budget template from being saved:</h2>
+
+      <ul>
+        <% @budget_template.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <%= f.text_field :name, placeholder: t(:name), class: "large-4 columns" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-4 columns">
+      <%= f.submit nil, class: "button" %>
+    </div>
+  </div>
+<% end %>
+
