@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <th><%=t :name %></th>
+    <% if @type == 'account' %>
+      <th><%=t :type %></th>
+    <% end %>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= link_to account.name, account %></td>
+        <% if @type == 'account' %>
+          <td><%= account.type.gsub(/Account/, '').titleize %></td>
+        <% end %>
+        <td><%= link_to 'Edit', send("edit_#{@type}_path", account) %></td>
+        <td><%= link_to 'Destroy', send("#{@type}_path", account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New #{@type.titleize}", send("new_#{@type}_path"), class: 'button' %>

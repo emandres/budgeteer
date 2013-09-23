@@ -1,0 +1,6 @@
+<p>
+  <strong><%=t :name %>:</strong>
+  <%= @account.name %>
+</p>
+<%= link_to 'Edit', send("edit_#{@type}_path", @account) %> |
+<%= link_to 'Back', send("#{@type.pluralize}_path") %>
