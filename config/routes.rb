@@ -9,4 +9,5 @@ Budgeteer::Application.routes.draw do
   resources :revenue_accounts, controller: 'accounts'
 
   resources :budget_templates
+  put "/budget_templates/:id/add_account" => "budget_templates#add_account"
 end

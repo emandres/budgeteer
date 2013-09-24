@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130923204542) do
+ActiveRecord::Schema.define(version: 20130924212611) do
 
   create_table "accounts", force: true do |t|
     t.string   "name",       null: false
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20130923204542) do
   end
 
   create_table "budget_items", force: true do |t|
-    t.string   "name"
     t.decimal  "amount",     precision: 10, scale: 2
     t.integer  "budget_id"
     t.integer  "account_id"
@@ -46,6 +45,7 @@ ActiveRecord::Schema.define(version: 20130923204542) do
 
   create_table "budgets", force: true do |t|
     t.string   "name"
+    t.integer  "budget_template_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

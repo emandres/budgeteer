@@ -25,9 +25,20 @@ class BudgetsController < ApplicationController
   # POST /budgets.json
   def create
     @budget = Budget.new(budget_params)
-
     respond_to do |format|
       if @budget.save
+        @budget.budget_template.revenue_accounts.each do |account|
+          last_account = Revenue.where(account: account).order(:created_at).last
+          amount = last_account ? last_account.amount : 0
+          @budget.revenues.create(account: account, amount: amount)
+        end
+
+        @budget.budget_template.expense_accounts.each do |account|
+          last_account = Expense.where(account: account).order(:created_at).last
+          amount = last_account ? last_account.amount : 0
+          @budget.expenses.create(account: account, amount: amount)
+        end
+
         format.html { redirect_to @budget, notice: 'Budget was successfully created.' }
         format.json { render action: 'show', status: :created, location: @budget }
       else
@@ -69,6 +80,6 @@ class BudgetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def budget_params
-      params.require(:budget).permit(:name)
+      params.require(:budget).permit(:name, :budget_template_id)
     end
 end

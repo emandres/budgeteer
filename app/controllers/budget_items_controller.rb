@@ -5,6 +5,7 @@ class BudgetItemsController < ApplicationController
   def new
     @budget = Budget.find(params[:budget_id])
     @budget_item = new_budget_item()
+    @accounts = type_class.all.reject { |a| @budget.budget_items.map(&:account).include? a }.sort_by(&:name)
     respond_with @budget_item
   end
 

@@ -17,7 +17,7 @@
           <tbody>
             <% budget_items.each do |r| %>
               <tr>
-                <td><%= r.name %></td>
+                <td><%= r.account.name %></td>
                 <td><%= number_to_currency r.amount %></td>
               </tr>
             <% end %>

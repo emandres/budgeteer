@@ -16,6 +16,14 @@
       <%= f.text_field :name, placeholder: t(:name), class: "large-4 columns" %>
     </div>
   </div>
+  <% if params[:action] == 'new' %>
+    <div class="row">
+      <div class="large-3 columns">
+        <%= f.label :budget_template_id %>
+        <%= f.collection_select(:budget_template_id, BudgetTemplate.all, :id, :name) %>
+      </div>
+    </div>
+  <% end %>
   <div class="row">
     <div class="large-4 columns">
       <%= f.submit nil, class: "button" %>

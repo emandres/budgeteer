@@ -3,26 +3,56 @@
 
   <h1><%= @budget_template.name %></h1>
   <div class="row">
-    <% [:revenue_accounts, :expense_accounts].each do |sym| %>
-      <% accounts = @budget_template.send(sym) %>
-      <div class="large-6 columns">
-        <h4><%=t sym %></h4>
-        <table cellspacing="0">
-          <thead>
+    <div class="large-6 columns">
+      <h4>Revenue Accounts</h4>
+      <table cellspacing="0">
+        <thead>
+          <tr>
+            <th><%=t :name %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @budget_template.revenue_accounts.each do |account| %>
             <tr>
-              <th><%=t :name %></th>
+              <td><%= account.name %></td>
             </tr>
-          </thead>
-          <tbody>
-            <% accounts.each do |account| %>
-              <tr>
-                <td><%= account.name %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="large-4 columns">
+          <%= form_tag budget_template_path(@budget_template) + '/add_account', method: :put do %>
+            <%= select_tag :account_id, options_from_collection_for_select(@revenue_accounts, :id, :name) %>
+            <%= submit_tag "Add Revenue Account", class: 'small button' %>
+          <% end %>
+        </div>
       </div>
-    <% end %>
+    </div>
+    <div class="large-6 columns">
+      <h4>Expense Accounts</h4>
+      <table cellspacing="0">
+        <thead>
+          <tr>
+            <th><%=t :name %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @budget_template.expense_accounts.each do |account| %>
+            <tr>
+              <td><%= account.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="large-4 columns">
+          <%= form_tag budget_template_path(@budget_template) + '/add_account', method: :put do %>
+            <%= select_tag :account_id, options_from_collection_for_select(@expense_accounts, :id, :name) %>
+            <%= submit_tag "Add Expense Account", class: 'small button' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 
   <%= link_to 'Edit', edit_budget_template_path(@budget_template) %> |

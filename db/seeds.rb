@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+['Food', 'Gas', 'Car Insurance', 'Car Payment', 'Mortgage'].each do |name|
+  ExpenseAccount.create(name: name)
+end
+
+['Salary', 'Savings Transfer'].each do |name|
+  RevenueAccount.create(name: name)
+end
+
+
